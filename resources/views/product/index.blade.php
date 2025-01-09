@@ -2,15 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
     rel="stylesheet"
     crossorigin="anonymous" />
-
-  <title>@yield('title')</title>
+  <title>{{ $title }}</title>
   <link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.css" />
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.js"></script>
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cauce_cookie.js"></script>
@@ -31,7 +29,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
-      <a class="navbar-brand" href="#">@yield('title')</a>
+      <a class="navbar-brand" href="#">{{ $title }}</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -54,13 +52,26 @@
 
   <header class="masthead bg-primary text-white text-center py-4">
     <div class="container d-flex align-items-center flex-column">
-      <h2>@yield('subtitle')</h2>
+      <h2>{{ $subtitle }}</h2>
     </div>
   </header>
 
   <!-- header -->
-
-  <div class="container my-4">@yield('content')</div>
+  <div class="row">
+    <!-- Bucle con una iteración por cada producto -->
+    @foreach ($products as $product)
+    <div class="col-md-4 col-lg-3 mb-2">
+      <div class="card">
+        <img src="{{ asset($product['image']) }}" class="card-img-top img-card" alt="producto">
+        <div class="card-body text-center">
+          <a href="#" class="btn bg-primary text-white">{{ $product['name'] }}</a>
+        </div>
+      </div>
+    </div>
+    @endforeach
+    <!-- FIN bucle con una iteración por cada producto -->
+  </div>
+  </div>
 
   <!-- footer -->
   <div class="copyright py-4 text-center text-white">
