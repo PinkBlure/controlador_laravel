@@ -47,4 +47,15 @@ class ProductController extends Controller
 
     return view('product.index', $data);
   }
+
+  public function show($id)
+  {
+    $product = collect(self::$products)->firstWhere('id', $id);
+
+    if (!$product) {
+        abort(404, 'Producto no encontrado');
+    }
+
+    return view('product.show', $product);
+  }
 }
