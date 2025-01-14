@@ -17,7 +17,7 @@
     </div>
     @endif
 
-    <form method="POST" action="****** RUTA *****">
+    <form method="POST" action="{{ route('admin.product.store') }}">
       @csrf
       <div class="row">
         <div class="col">
@@ -28,11 +28,21 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col">
           <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label" for="price">Precio:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
               <input name="price" type="number" class="form-control" value="{{ old('price') }}">
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3 row">
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label" for="stock">Stock:</label>
+            <div class="col-lg-10 col-md-6 col-sm-12">
+              <input name="stock" type="number" class="form-control" value="{{ old('stock') }}">
             </div>
           </div>
         </div>

@@ -14,4 +14,5 @@ Route::get('/products', [ProductController::class, 'index'])->name('product');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
 
 Route::get('/admin', [AdminHomeController::class, 'index'])->name('admin.home');
-Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+Route::get('/admin/products', [AdminProductController::class, 'index'])->name('admin.product.index');
+Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.product.store');
