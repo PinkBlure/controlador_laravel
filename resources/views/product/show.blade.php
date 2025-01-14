@@ -8,7 +8,7 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
     rel="stylesheet"
     crossorigin="anonymous" />
-  <title>{{ $name }}</title>
+  <title>{{ $product['name'] }}</title>
   <link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.css" />
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.js"></script>
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cauce_cookie.js"></script>
@@ -29,7 +29,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
-      <a class="navbar-brand" href="#">{{ $name }}</a>
+      <a class="navbar-brand" href="#">{{ $product['name'] }}</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -52,7 +52,7 @@
 
   <header class="masthead bg-primary text-white text-center py-4">
     <div class="container d-flex align-items-center flex-column">
-      <h2>{{ $name }}</h2>
+      <h2>{{ $product['name'] }}</h2>
     </div>
   </header>
 
@@ -63,14 +63,14 @@
   <div class="card mb-3">
     <div class="row g-0">
       <div class="col-md-4">
-        <img src="{{ asset($image) }}" class="img-fluid rounded-start">
+        <img src="{{ asset($product['image']) }}" class="img-fluid rounded-start">
       </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">
-          {{ $name }} (${{ $price }})
+          {{ $product['name'] }} (${{ $product['price'] }})
           </h5>
-          <p class="card-text">{{ $description }}</p>
+          <p class="card-text">{{ $product['description'] }}</p>
           <p class="card-text"><small class="text-muted">Añadir a la cesta</small></p>
         </div>
       </div>
