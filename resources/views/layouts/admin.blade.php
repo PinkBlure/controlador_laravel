@@ -20,7 +20,7 @@
       <hr />
       <ul class="nav flex-column">
         <li><a href="{{ route('admin.home') }}" class="nav-link text-white">- Admin - Home</a></li>
-        <li><a href="*** ENLACE A LA ADMINISTRACIÓN DE PRODUCTOS ***" class="nav-link text-white">- Admin - Products</a></li>
+        <li><a href="{{ route('admin.products.index') }}" class="nav-link text-white">- Admin - Products</a></li>
         <li>
           <a href="{{ url('/') }}" class="mt-2 btn bg-primary text-white">Go back to the home page</a>
         </li>
