@@ -53,4 +53,16 @@ class AdminProductController extends Controller
 
     return redirect()->route('admin.product.index')->with('success', 'Producto creado exitosamente.');
   }
+
+  public function delete($id)
+  {
+    $product = Product::findOrFail($id);
+
+    if ($product->image) {
+      Storage::delete($product->image);
+    }
+
+    $product->delete();
+    return redirect()->route('admin.product.index')->with('success', 'Producto eliminado con éxito.');
+  }
 }

@@ -85,13 +85,21 @@
           <td>{{ $product->id }}</td>
           <td>{{ $product->name }}</td>
           <td>
-          <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid" style="max-height: 300px;">
+            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid" style="max-height: 300px;">
           </td>
           <td>
             <a href="#" class="disabled" style="pointer-events: none; opacity: 0.5;">Editar</a>
           </td>
           <td>
-            <a href="#" class="disabled" style="pointer-events: none; opacity: 0.5;">Eliminar</a>
+            <form action="{{ route('admin.products.delete', $product->id) }}" method="POST" style="display: inline;"
+              onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-link p-0" style="pointer-events: auto; opacity: 1;">
+                Eliminar
+              </button>
+            </form>
+
           </td>
         </tr>
         @endforeach
