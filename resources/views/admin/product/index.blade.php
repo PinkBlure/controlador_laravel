@@ -17,14 +17,22 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ route('admin.product.store') }}">
+    <form method="POST" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
       @csrf
       <div class="row">
         <div class="col">
           <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label" for="name">Nombre:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="name" type="text" class="form-control" value="{{ old('name') }}">
+              <input name="name" id="name" type="text" class="form-control" value="{{ old('name') }}">
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3 row">
+            <label class="col-lg-2 col-md-6 col-sm-12 col-form-label" for="image">Image:</label>
+            <div class="col-lg-10 col-md-6 col-sm-12">
+              <input name="image" id="image" type="file" class="form-control" accept="image/*" value="{{ old('image') }}" required>
             </div>
           </div>
         </div>
@@ -34,7 +42,7 @@
           <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label" for="price">Precio:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="price" type="number" class="form-control" value="{{ old('price') }}">
+              <input name="price" id="price" type="number" class="form-control" value="{{ old('price') }}">
             </div>
           </div>
         </div>
@@ -42,14 +50,14 @@
           <div class="mb-3 row">
             <label class="col-lg-2 col-md-6 col-sm-12 col-form-label" for="stock">Stock:</label>
             <div class="col-lg-10 col-md-6 col-sm-12">
-              <input name="stock" type="number" class="form-control" value="{{ old('stock') }}">
+              <input name="stock" id="stock" type="number" class="form-control" value="{{ old('stock') }}">
             </div>
           </div>
         </div>
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Descripción</label>
-        <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
+        <textarea class="form-control" name="description" id="description" rows="3">{{ old('description') }}</textarea>
       </div>
       <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
@@ -66,6 +74,7 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Nombre</th>
+          <th scope="col">Imagen</th>
           <th scope="col">Editar</th>
           <th scope="col">Eliminar</th>
         </tr>
@@ -75,6 +84,9 @@
         <tr>
           <td>{{ $product->id }}</td>
           <td>{{ $product->name }}</td>
+          <td>
+          <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid" style="max-height: 300px;">
+          </td>
           <td>
             <a href="#" class="disabled" style="pointer-events: none; opacity: 0.5;">Editar</a>
           </td>

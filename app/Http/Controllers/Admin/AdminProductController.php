@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
@@ -25,6 +26,7 @@ class AdminProductController extends Controller
       'name' => 'required|max:255',
       'description' => 'required',
       'price' => 'required|numeric|gt:0',
+      'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     if ($validator->fails()) {
@@ -35,9 +37,19 @@ class AdminProductController extends Controller
     $product->name = $request->input('name');
     $product->description = $request->input('description');
     $product->price = $request->input('price');
-    $product->image = 'image.jpg';
     $product->stock = 0;
-    $product->save();
+
+    if ($request->hasFile('image')) {
+      $product->save();
+      $image = $request->file('image');
+      $imageName = $product->id . '.' . $image->getClientOriginalExtension();
+      $image->storeAs($imageName);
+      $product->image = $imageName;
+      $product->save();
+    } else {
+      $product->save();
+    }
+
 
     return redirect()->route('admin.product.index')->with('success', 'Producto creado exitosamente.');
   }

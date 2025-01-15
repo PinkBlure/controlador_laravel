@@ -62,7 +62,7 @@
     @foreach ($products as $product)
     <div class="col-md-4 col-lg-3 mb-2">
       <div class="card">
-        <img src="{{ asset($product['image']) }}" class="card-img-top img-card" alt="producto">
+      <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top img-card" alt="producto">
         <div class="card-body text-center">
           <a href="{{ url('/products/' . $product['id']) }}" class="btn bg-primary text-white">{{ $product['name'] }}</a>
         </div>
