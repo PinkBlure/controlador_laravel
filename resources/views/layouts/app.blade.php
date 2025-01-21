@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -11,11 +10,6 @@
     crossorigin="anonymous" />
 
   <title>@yield('title')</title>
-  <link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.css" />
-  <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.js"></script>
-  <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cauce_cookie.js"></script>
-  <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-base.js"></script>
-  <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-eforma.js"></script>
   <link rel="stylesheet" type="text/css" href="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.css" />
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cookieconsent.min.js"></script>
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/cookies/cauce_cookie.js"></script>
@@ -29,6 +23,7 @@
 
   <!-- header -->
 
+  <!-- NavBar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
       <a class="navbar-brand" href="#">@yield('title')</a>
@@ -47,10 +42,26 @@
           <a class="nav-link active" href="{{ route('home') }}">Home</a>
           <a class="nav-link active" href="{{ route('about') }}">About</a>
           <a class="nav-link active" href="{{ route('product') }}">Product</a>
+
+          @guest
+          <a class="nav-link active" href="{{ route('login') }}">Login</a>
+          <a class="nav-link active" href="{{ route('register') }}">Register</a>
+          @endguest
+
+          @auth
+          <a class="nav-link active" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+          @endauth
         </div>
       </div>
     </div>
   </nav>
+
 
   <header class="masthead bg-primary text-white text-center py-4">
     <div class="container d-flex align-items-center flex-column">

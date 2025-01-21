@@ -27,9 +27,10 @@
 
   <!-- header -->
 
+  <!-- NavBar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
-      <a class="navbar-brand" href="#">{{ $title }}</a>
+      <a class="navbar-brand" href="#">@yield('title')</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -45,6 +46,21 @@
           <a class="nav-link active" href="{{ route('home') }}">Home</a>
           <a class="nav-link active" href="{{ route('about') }}">About</a>
           <a class="nav-link active" href="{{ route('product') }}">Product</a>
+
+          @guest
+          <a class="nav-link active" href="{{ route('login') }}">Login</a>
+          <a class="nav-link active" href="{{ route('register') }}">Register</a>
+          @endguest
+
+          @auth
+          <a class="nav-link active" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+          @endauth
         </div>
       </div>
     </div>
