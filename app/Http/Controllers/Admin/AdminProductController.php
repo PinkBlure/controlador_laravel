@@ -65,4 +65,46 @@ class AdminProductController extends Controller
     $product->delete();
     return redirect()->route('admin.product.index')->with('success', 'Producto eliminado con éxito.');
   }
+
+  public function edit($id)
+  {
+    $product = Product::findOrFail($id);
+    return view('admin.product.edit', compact('product'));
+  }
+
+  public function update(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'description' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $product = Product::findOrFail($id);
+
+    $product->name = $validatedData['name'];
+    $product->price = $validatedData['price'];
+    $product->description = $validatedData['description'];
+
+    if ($request->hasFile('image')) {
+        try {
+
+            if ($product->image && Storage::exists($product->image)) {
+                Storage::delete($product->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = $product->id . '.' . $image->getClientOriginalExtension();
+            $image->storeAs($imageName);
+            $product->image = $imageName;
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['image' => 'Error al procesar la imagen: ' . $e->getMessage()]);
+        }
+    }
+
+    $product->save();
+
+    return redirect()->route('admin.products.edit', $id)->with('success', 'Producto actualizado correctamente.');
+}
 }

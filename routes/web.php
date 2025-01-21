@@ -18,3 +18,5 @@ Route::get('/admin/products', [AdminProductController::class, 'index'])->name('a
 Route::post('/admin/products', [AdminProductController::class, 'store'])->name('admin.product.store');
 Route::delete('/admin/products/{id}/delete', [AdminProductController::class, 'delete'])->name('admin.products.delete');
 
+Route::get('/admin/products/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.products.edit');
+Route::post('/admin/products/{id}/update', [AdminProductController::class, 'update'])->name('admin.products.update');
