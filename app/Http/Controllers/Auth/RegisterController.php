@@ -17,21 +17,24 @@ class RegisterController extends Controller
 
   public function register(Request $request)
   {
+    try {
+      $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
+      ]);
 
-    $request->validate([
-      'name' => 'required|string|max:255',
-      'email' => 'required|email|unique:users,email',
-      'password' => 'required|string|min:8|confirmed',
-    ]);
+      $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => $request->password, // Laravel aplicará el hash automáticamente
+      ]);
 
-    $user = User::create([
-      'name' => $request->name,
-      'email' => $request->email,
-      'password' => Hash::make($request->password),
-    ]);
+      Auth::login($user);
 
-    Auth::login($user);
-
-    return redirect()->route('home');
+      return redirect()->route('home');
+    } catch (\Exception $e) {
+      dd($e->getMessage());
+    }
   }
 }

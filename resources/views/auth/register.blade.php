@@ -13,15 +13,26 @@
       <div class="card-body">
         <form action="{{ route('register') }}" method="POST">
           @csrf
+
+          <!-- Mostrar errores de validación -->
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
           
           <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" name="name" class="form-control" id="name" required>
+            <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" required>
           </div>
 
           <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico</label>
-            <input type="email" name="email" class="form-control" id="email" required>
+            <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}" required>
           </div>
 
           <div class="mb-3">
