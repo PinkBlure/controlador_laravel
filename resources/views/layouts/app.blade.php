@@ -49,6 +49,7 @@
           @endguest
 
           @auth
+          <a class="nav-link active" href="{{ route('settings.show') }}">Settings</a> <!-- Enlace a la página de configuración -->
           <a class="nav-link active" href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Logout
@@ -62,8 +63,7 @@
     </div>
   </nav>
 
-
-  <header class="masthead bg-primary text-white text-center py-4">
+  <header class="text-white text-center py-4" style="background-color: {{ session('header_color', '#1abc9c') }};">
     <div class="container d-flex align-items-center flex-column">
       <h2>@yield('subtitle')</h2>
     </div>

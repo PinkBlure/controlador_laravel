@@ -36,6 +36,7 @@ class LoginController extends Controller
 
   public function logout(Request $request)
   {
+    session()->forget('header_color');
     Auth::logout();
     return redirect()->route('login');
   }

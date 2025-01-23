@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SettingsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -29,3 +30,8 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/configuracion', [SettingsController::class, 'show'])->name('settings.show');
+    Route::post('/configuracion', [SettingsController::class, 'update'])->name('settings.update');
+});
