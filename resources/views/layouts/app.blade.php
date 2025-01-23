@@ -17,6 +17,13 @@
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-eforma.js"></script>
 
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+  <style>
+    /* Aplicar tipo de letra desde la sesión */
+    body {
+      font-family: {{ session('font_family', 'Arial') }};
+    }
+  </style>
 </head>
 
 <body>

@@ -8,22 +8,19 @@ class SettingsController extends Controller
 {
   public function show()
   {
-    // Obtener los valores actuales del color y la fuente desde la sesión
-    $headerColor = session('header_color', '#000000'); // Color por defecto negro
-    $fontFamily = session('font_family', 'Arial'); // Tipo de letra por defecto
+    $headerColor = session('header_color', '#1abc9c');
+    $fontFamily = session('font_family', 'Arial');
 
     return view('settings', compact('headerColor', 'fontFamily'));
   }
 
   public function update(Request $request)
   {
-    // Validar la entrada del usuario
     $request->validate([
       'header_color' => 'required|string',
       'font_family' => 'required|string',
     ]);
 
-    // Guardar los valores en la sesión
     session(['header_color' => $request->header_color]);
     session(['font_family' => $request->font_family]);
 

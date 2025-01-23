@@ -21,6 +21,12 @@
   <script type="text/javascript" src="https://www3.gobiernodecanarias.org/educacion/cau_ce/estadisticasweb/scripts/piwik-eforma.js"></script>
 
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <style>
+    /* Aplicar tipo de letra desde la sesión */
+    body {
+      font-family: {{ session('font_family', 'Arial') }};
+    }
+  </style>
 </head>
 
 <body>
@@ -28,7 +34,7 @@
   <!-- NavBar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-secondary py-4">
     <div class="container">
-      <a class="navbar-brand" href="#">Expositor de producto</a>
+      <a class="navbar-brand" href="#">@yield('title')</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -51,6 +57,7 @@
           @endguest
 
           @auth
+          <a class="nav-link active" href="{{ route('settings.show') }}">Settings</a> <!-- Enlace a la página de configuración -->
           <a class="nav-link active" href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Logout
@@ -64,7 +71,7 @@
     </div>
   </nav>
 
-  <header class="masthead bg-primary text-white text-center py-4">
+  <header class="text-white text-center py-4" style="background-color: {{ session('header_color', '#1abc9c') }};">
     <div class="container d-flex align-items-center flex-column">
       <h2>{{ $product['name'] }}</h2>
     </div>
